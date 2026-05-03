@@ -19,11 +19,26 @@ const getAllProducts = () => products;
 
 const getProductById = (id) => products.find(product => product.id === id);
 
+const getProductByIndex = (id) => products.findIndex(product => product.id === id);
+
 const addProduct = ({ name, price, stock }) => {
     const newProduct = { id: products.length + 1, name, price, stock };
     products.push(newProduct);
     return newProduct;
 };
 
-module.exports = { getAllProducts, getProductById, addProduct };
+const stockProduct = (product, stock) => {
+    product.stock = stock;
+    return product;
+}
+
+const deletedProduct = (id) => {
+    const index = products.findIndex(product => product.id === id);
+    if (index === -1) return null;
+    const deletedProduct = products.splice(index, 1)
+    return deletedProduct[0];
+
+}
+
+module.exports = { getAllProducts, getProductById, addProduct, stockProduct, deletedProduct, getProductByIndex };
 
